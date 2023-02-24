@@ -1,0 +1,121 @@
+For this lab, I've used scala to implement the spark application.  RDD transformation procedure: first I set up a spark transformation object called sc.
+And then I made sc to keep tracking the logfile name which has ".JPG".  Then I made an action to count how many ".JPG" the weblogs have.  Finally, I stopped the application.
+The full process is: 1. registering application master; 2. calculating memory space for executor containers; 3. memory is good, container started request; 4. start process reported thread; 5. launching container and driver; 6. receive container and start a container; 7. set up container launch context; 8. preparing local resource; 9. Setting up executor with environment; 10. Setting up executor with commands; 11. login web server to get weblog; 12. Driver terminated or disconnected; 13. Final app; 14. Unregistering Application Master; 15. Driver terminated or disconnected; 16. Waiting for application to be successfully unregistered; 17. Deleting staging directory; 18. Driver terminated or disconnected! Shutting down. Disassociated.
+The final output is JPG count 64978, the output also lists log time, log upload time, log length, and log contents.  It was divided to 2 contents, all their log types are stdout, they all have the same upload time, the first part of the log has log length 8124, the other has 0.  For the log contents, both parts located all the process described above for transformation and action, then the application terminated.
+
+The full output is below:
+21/11/23 21:09:40 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+
+
+Container: container_1637464434752_0002_01_000001 on localhost_56644
+======================================================================
+LogType:stderr
+Log Upload Time:Tue Nov 23 21:04:29 -0800 2021
+LogLength:8124
+Log Contents:
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/usr/lib/zookeeper/lib/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/usr/lib/flume-ng/lib/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+21/11/23 21:04:02 INFO yarn.ApplicationMaster: Registered signal handlers for [TERM, HUP, INT]
+21/11/23 21:04:04 INFO yarn.ApplicationMaster: ApplicationAttemptId: appattempt_1637464434752_0002_000001
+21/11/23 21:04:05 INFO spark.SecurityManager: Changing view acls to: yarn,training
+21/11/23 21:04:05 INFO spark.SecurityManager: Changing modify acls to: yarn,training
+21/11/23 21:04:05 INFO spark.SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: Set(yarn, training); users with modify permissions: Set(yarn, training)
+21/11/23 21:04:05 WARN util.Utils: Your hostname, localhost.localdomain resolves to a loopback address: 127.0.0.1; using 192.168.174.130 instead (on interface eth0)
+21/11/23 21:04:05 WARN util.Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+21/11/23 21:04:05 INFO slf4j.Slf4jLogger: Slf4jLogger started
+21/11/23 21:04:05 INFO Remoting: Starting remoting
+21/11/23 21:04:05 INFO Remoting: Remoting started; listening on addresses :[akka.tcp://sparkYarnAM@192.168.174.130:51229]
+21/11/23 21:04:05 INFO Remoting: Remoting now listens on addresses: [akka.tcp://sparkYarnAM@192.168.174.130:51229]
+21/11/23 21:04:06 INFO util.Utils: Successfully started service 'sparkYarnAM' on port 51229.
+21/11/23 21:04:06 INFO yarn.ApplicationMaster: Waiting for Spark driver to be reachable.
+21/11/23 21:04:06 INFO yarn.ApplicationMaster: Driver now available: 192.168.174.130:38455
+21/11/23 21:04:06 INFO yarn.ApplicationMaster: Listen to driver: akka.tcp://sparkDriver@192.168.174.130:38455/user/YarnScheduler
+21/11/23 21:04:06 INFO yarn.ApplicationMaster: Add WebUI Filter. AddWebUIFilter(org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter,Map(PROXY_HOSTS -> localhost, PROXY_URI_BASES -> http://localhost:8088/proxy/application_1637464434752_0002),/proxy/application_1637464434752_0002)
+21/11/23 21:04:06 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8030
+21/11/23 21:04:06 INFO yarn.YarnRMClient: Registering the ApplicationMaster
+21/11/23 21:04:06 INFO yarn.YarnAllocator: Will request 2 executor containers, each with 1 cores and 784 MB memory including 384 MB overhead
+21/11/23 21:04:06 INFO yarn.YarnAllocator: Container request (host: Any, capability: <memory:784, vCores:1>)
+21/11/23 21:04:06 INFO yarn.YarnAllocator: Container request (host: Any, capability: <memory:784, vCores:1>)
+21/11/23 21:04:06 INFO yarn.ApplicationMaster: Started progress reporter thread - sleep time : 5000
+21/11/23 21:04:11 INFO impl.AMRMClientImpl: Received new token for : localhost:56644
+21/11/23 21:04:11 INFO yarn.YarnAllocator: Launching container container_1637464434752_0002_01_000002 for on host localhost
+21/11/23 21:04:11 INFO yarn.YarnAllocator: Launching ExecutorRunnable. driverUrl: akka.tcp://sparkDriver@192.168.174.130:38455/user/CoarseGrainedScheduler,  executorHostname: localhost
+21/11/23 21:04:11 INFO yarn.YarnAllocator: Received 1 containers from YARN, launching executors on 1 of them.
+21/11/23 21:04:11 INFO yarn.ExecutorRunnable: Starting Executor Container
+21/11/23 21:04:11 INFO impl.ContainerManagementProtocolProxy: yarn.client.max-cached-nodemanagers-proxies : 0
+21/11/23 21:04:11 INFO yarn.ExecutorRunnable: Setting up ContainerLaunchContext
+21/11/23 21:04:11 INFO yarn.ExecutorRunnable: Preparing Local resources
+21/11/23 21:04:12 INFO yarn.ExecutorRunnable: Prepared Local resources Map(__spark__.jar -> resource { scheme: "hdfs" host: "localhost" port: 8020 file: "/user/training/.sparkStaging/application_1637464434752_0002/spark-assembly-1.3.0-cdh5.4.3-hadoop2.6.0-cdh5.4.3.jar" } size: 97648667 timestamp: 1637730240444 type: FILE visibility: PRIVATE)
+21/11/23 21:04:12 INFO yarn.ExecutorRunnable: Setting up executor with environment: Map(CLASSPATH -> {{PWD}}<CPS>{{PWD}}/__spark__.jar<CPS>$HADOOP_CONF_DIR<CPS>$HADOOP_COMMON_HOME/*<CPS>$HADOOP_COMMON_HOME/lib/*<CPS>$HADOOP_HDFS_HOME/*<CPS>$HADOOP_HDFS_HOME/lib/*<CPS>$HADOOP_MAPRED_HOME/*<CPS>$HADOOP_MAPRED_HOME/lib/*<CPS>$HADOOP_YARN_HOME/*<CPS>$HADOOP_YARN_HOME/lib/*<CPS>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*<CPS>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*<CPS>:/usr/lib/spark/lib/spark-assembly.jar::/usr/lib/hadoop/lib/*:/usr/lib/hadoop/*:/usr/lib/hadoop-hdfs/lib/*:/usr/lib/hadoop-hdfs/*:/usr/lib/hadoop-mapreduce/lib/*:/usr/lib/hadoop-mapreduce/*:/usr/lib/hadoop-yarn/lib/*:/usr/lib/hadoop-yarn/*:/usr/lib/hive/lib/*:/usr/lib/flume-ng/lib/*:/usr/lib/paquet/lib/*:/usr/lib/avro/lib/*, SPARK_LOG_URL_STDERR -> http://localhost:8042/node/containerlogs/container_1637464434752_0002_01_000002/training/stderr?start=0, SPARK_DIST_CLASSPATH -> :/usr/lib/spark/lib/spark-assembly.jar::/usr/lib/hadoop/lib/*:/usr/lib/hadoop/*:/usr/lib/hadoop-hdfs/lib/*:/usr/lib/hadoop-hdfs/*:/usr/lib/hadoop-mapreduce/lib/*:/usr/lib/hadoop-mapreduce/*:/usr/lib/hadoop-yarn/lib/*:/usr/lib/hadoop-yarn/*:/usr/lib/hive/lib/*:/usr/lib/flume-ng/lib/*:/usr/lib/paquet/lib/*:/usr/lib/avro/lib/*, SPARK_YARN_STAGING_DIR -> .sparkStaging/application_1637464434752_0002, SPARK_YARN_CACHE_FILES_FILE_SIZES -> 97648667, SPARK_USER -> training, SPARK_YARN_CACHE_FILES_VISIBILITIES -> PRIVATE, SPARK_YARN_MODE -> true, SPARK_YARN_CACHE_FILES_TIME_STAMPS -> 1637730240444, SPARK_LOG_URL_STDOUT -> http://localhost:8042/node/containerlogs/container_1637464434752_0002_01_000002/training/stdout?start=0, SPARK_YARN_CACHE_FILES -> hdfs://localhost:8020/user/training/.sparkStaging/application_1637464434752_0002/spark-assembly-1.3.0-cdh5.4.3-hadoop2.6.0-cdh5.4.3.jar#__spark__.jar)
+21/11/23 21:04:12 INFO yarn.ExecutorRunnable: Setting up executor with commands: List({{JAVA_HOME}}/bin/java, -server, -XX:OnOutOfMemoryError='kill %p', -Xms400m, -Xmx400m, -Djava.io.tmpdir={{PWD}}/tmp, '-Dspark.driver.port=38455', -Dspark.yarn.app.container.log.dir=<LOG_DIR>, org.apache.spark.executor.CoarseGrainedExecutorBackend, --driver-url, akka.tcp://sparkDriver@192.168.174.130:38455/user/CoarseGrainedScheduler, --executor-id, 1, --hostname, localhost, --cores, 1, --app-id, application_1637464434752_0002, --user-class-path, file:$PWD/__app__.jar, 1>, <LOG_DIR>/stdout, 2>, <LOG_DIR>/stderr)
+21/11/23 21:04:12 INFO impl.ContainerManagementProtocolProxy: Opening proxy : localhost:56644
+21/11/23 21:04:28 INFO yarn.ApplicationMaster: Driver terminated or disconnected! Shutting down. Disassociated [akka.tcp://sparkYarnAM@192.168.174.130:51229] -> [akka.tcp://sparkDriver@192.168.174.130:38455]
+21/11/23 21:04:28 INFO yarn.ApplicationMaster: Final app status: SUCCEEDED, exitCode: 0
+21/11/23 21:04:28 INFO yarn.ApplicationMaster: Unregistering ApplicationMaster with SUCCEEDED
+21/11/23 21:04:28 INFO yarn.ApplicationMaster: Driver terminated or disconnected! Shutting down. Disassociated [akka.tcp://sparkYarnAM@192.168.174.130:51229] -> [akka.tcp://sparkDriver@192.168.174.130:38455]
+21/11/23 21:04:28 INFO impl.AMRMClientImpl: Waiting for application to be successfully unregistered.
+21/11/23 21:04:28 INFO yarn.ApplicationMaster: Deleting staging directory .sparkStaging/application_1637464434752_0002
+21/11/23 21:04:28 INFO yarn.ApplicationMaster: Driver terminated or disconnected! Shutting down. Disassociated [akka.tcp://sparkYarnAM@192.168.174.130:51229] -> [akka.tcp://sparkDriver@192.168.174.130:38455]
+21/11/23 21:04:28 INFO yarn.ApplicationMaster: Driver terminated or disconnected! Shutting down. Disassociated [akka.tcp://sparkYarnAM@192.168.174.130:51229] -> [akka.tcp://sparkDriver@192.168.174.130:38455]
+21/11/23 21:04:28 INFO yarn.ApplicationMaster: Driver terminated or disconnected! Shutting down. Disassociated [akka.tcp://sparkYarnAM@192.168.174.130:51229] -> [akka.tcp://sparkDriver@192.168.174.130:38455]
+
+LogType:stdout
+Log Upload Time:Tue Nov 23 21:04:29 -0800 2021
+LogLength:0
+Log Contents:
+
+
+
+Container: container_1637464434752_0002_01_000002 on localhost_56644
+======================================================================
+LogType:stderr
+Log Upload Time:Tue Nov 23 21:04:29 -0800 2021
+LogLength:4253
+Log Contents:
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/usr/lib/zookeeper/lib/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/usr/lib/flume-ng/lib/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+21/11/23 21:04:13 INFO executor.CoarseGrainedExecutorBackend: Registered signal handlers for [TERM, HUP, INT]
+21/11/23 21:04:14 INFO spark.SecurityManager: Changing view acls to: yarn,training
+21/11/23 21:04:14 INFO spark.SecurityManager: Changing modify acls to: yarn,training
+21/11/23 21:04:14 INFO spark.SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: Set(yarn, training); users with modify permissions: Set(yarn, training)
+21/11/23 21:04:15 INFO slf4j.Slf4jLogger: Slf4jLogger started
+21/11/23 21:04:15 INFO Remoting: Starting remoting
+21/11/23 21:04:15 INFO Remoting: Remoting started; listening on addresses :[akka.tcp://driverPropsFetcher@localhost:49519]
+21/11/23 21:04:15 INFO Remoting: Remoting now listens on addresses: [akka.tcp://driverPropsFetcher@localhost:49519]
+21/11/23 21:04:15 INFO util.Utils: Successfully started service 'driverPropsFetcher' on port 49519.
+21/11/23 21:04:16 INFO remote.RemoteActorRefProvider$RemotingTerminator: Shutting down remote daemon.
+21/11/23 21:04:16 INFO remote.RemoteActorRefProvider$RemotingTerminator: Remote daemon shut down; proceeding with flushing remote transports.
+21/11/23 21:04:16 INFO spark.SecurityManager: Changing view acls to: yarn,training
+21/11/23 21:04:16 INFO spark.SecurityManager: Changing modify acls to: yarn,training
+21/11/23 21:04:16 INFO spark.SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: Set(yarn, training); users with modify permissions: Set(yarn, training)
+21/11/23 21:04:16 INFO Remoting: Remoting shut down
+21/11/23 21:04:16 INFO remote.RemoteActorRefProvider$RemotingTerminator: Remoting shut down.
+21/11/23 21:04:16 INFO slf4j.Slf4jLogger: Slf4jLogger started
+21/11/23 21:04:16 INFO Remoting: Starting remoting
+21/11/23 21:04:16 INFO Remoting: Remoting started; listening on addresses :[akka.tcp://sparkExecutor@localhost:58565]
+21/11/23 21:04:16 INFO Remoting: Remoting now listens on addresses: [akka.tcp://sparkExecutor@localhost:58565]
+21/11/23 21:04:16 INFO util.Utils: Successfully started service 'sparkExecutor' on port 58565.
+21/11/23 21:04:16 INFO util.AkkaUtils: Connecting to MapOutputTracker: akka.tcp://sparkDriver@192.168.174.130:38455/user/MapOutputTracker
+21/11/23 21:04:16 INFO util.AkkaUtils: Connecting to BlockManagerMaster: akka.tcp://sparkDriver@192.168.174.130:38455/user/BlockManagerMaster
+21/11/23 21:04:16 INFO storage.DiskBlockManager: Created local directory at /var/lib/hadoop-yarn/cache/yarn/nm-local-dir/usercache/training/appcache/application_1637464434752_0002/blockmgr-44926325-df4f-4898-b99b-56fb26cab11f
+21/11/23 21:04:16 INFO storage.MemoryStore: MemoryStore started with capacity 208.8 MB
+21/11/23 21:04:17 INFO util.AkkaUtils: Connecting to OutputCommitCoordinator: akka.tcp://sparkDriver@192.168.174.130:38455/user/OutputCommitCoordinator
+21/11/23 21:04:17 INFO executor.CoarseGrainedExecutorBackend: Connecting to driver: akka.tcp://sparkDriver@192.168.174.130:38455/user/CoarseGrainedScheduler
+21/11/23 21:04:17 INFO executor.CoarseGrainedExecutorBackend: Successfully registered with driver
+21/11/23 21:04:17 INFO executor.Executor: Starting executor ID 1 on host localhost
+21/11/23 21:04:17 INFO netty.NettyBlockTransferService: Server created on 46986
+21/11/23 21:04:17 INFO storage.BlockManagerMaster: Trying to register BlockManager
+21/11/23 21:04:17 INFO storage.BlockManagerMaster: Registered BlockManager
+21/11/23 21:04:17 INFO util.AkkaUtils: Connecting to HeartbeatReceiver: akka.tcp://sparkDriver@192.168.174.130:38455/user/HeartbeatReceiver
+21/11/23 21:04:28 ERROR executor.CoarseGrainedExecutorBackend: Driver Disassociated [akka.tcp://sparkExecutor@localhost:58565] -> [akka.tcp://sparkDriver@192.168.174.130:38455] disassociated! Shutting down.
+
+LogType:stdout
+Log Upload Time:Tue Nov 23 21:04:29 -0800 2021
+LogLength:0
+Log Contents:
